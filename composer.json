@@ -1,0 +1,25 @@
+{
+    "name": "arkitecht/calendar",
+    "description": "PHP Calendar Utilities for Drawing Calendars",
+    "type": "library",
+    "require": {
+        "nesbot/carbon": "^2.16"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Aaron J. Rubin",
+            "email": "aaron@arkitech.net"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Arkitecht\\Calendar\\": "src/Arkitecht/Calendar/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    }
+}
