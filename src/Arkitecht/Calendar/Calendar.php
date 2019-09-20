@@ -63,7 +63,7 @@ class Calendar
 
     public function getDate()
     {
-        return $this->date;
+        return $this->getDateCopy();
     }
 
     public function getFirstDay($view = 'month')
