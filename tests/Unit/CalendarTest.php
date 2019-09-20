@@ -3,7 +3,7 @@
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 
-class CalendarTests extends TestCase
+class CalendarTest extends TestCase
 {
     /** @test */
     function can_get_a_calendar_class()
@@ -237,7 +237,7 @@ class CalendarTests extends TestCase
     /** @test */
     function can_set_locale()
     {
-        $calendar = new Arkitecht\Calendar\Calendar('2019-10-01', 1, 'es');
+        $calendar = new Arkitecht\Calendar\Calendar('2019-10-01', 1, 'es_ES');
         $this->assertEquals('octubre', $calendar->getMonthName());
     }
 
@@ -284,7 +284,7 @@ class CalendarTests extends TestCase
     /** @test */
     function can_get_day_names_by_locale()
     {
-        $calendar = new Arkitecht\Calendar\Calendar('2019-10-01', 0, 'es');
+        $calendar = new Arkitecht\Calendar\Calendar('2019-10-01', 0, 'es_ES');
         $names = $calendar->getDayNames();
 
         $this->assertEquals(7, count($names));

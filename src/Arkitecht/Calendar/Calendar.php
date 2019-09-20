@@ -11,8 +11,9 @@ class Calendar
     private $start_of_week;
     private $end_of_week;
 
-    public function __construct($date = null, $startOfWeek = 0, $locale = 'us')
+    public function __construct($date = null, $startOfWeek = 0, $locale = 'en')
     {
+        setlocale(LC_TIME, '');
         $this->setDate($date);
         $this->setStartOfweek($startOfWeek);
         $this->setLocale($locale);
@@ -26,9 +27,10 @@ class Calendar
         return $this;
     }
 
-    public function setLocale($locale = 'us')
+    public function setLocale($locale = 'en')
     {
-        $this->date->locale($locale);
+        setlocale(LC_TIME, $locale);
+        $this->date->setLocale($locale);
 
         return $this;
     }
@@ -67,15 +69,13 @@ class Calendar
     public function getFirstDay($view = 'month')
     {
         if ($view == 'month') {
-            return $this->date
-                ->clone()
+            return $this->getDateCopy()
                 ->startOfMonth()
                 ->startOfWeek($this->start_of_week);
         }
 
         if ($view == 'week') {
-            return $this->date
-                ->clone()
+            return $this->getDateCopy()
                 ->startOfWeek($this->start_of_week);
         }
 
@@ -88,14 +88,14 @@ class Calendar
     {
         if ($view == 'month') {
             return $this->date
-                ->clone()
+                ->copy()
                 ->endOfMonth()
                 ->endOfWeek($this->end_of_week);
         }
 
         if ($view == 'week') {
             return $this->date
-                ->clone()
+                ->copy()
                 ->endOfWeek($this->end_of_week);
         }
 
@@ -107,13 +107,13 @@ class Calendar
     public function getMonthDays()
     {
         $startOfMonth = $this->date
-            ->clone()
+            ->copy()
             ->startOfMonth();
 
         $day = $this->getFirstDay();
 
         $endOfMonth = $this->date
-            ->clone()
+            ->copy()
             ->endOfMonth();
 
         $endDay = $this->getLastDay();
@@ -122,7 +122,7 @@ class Calendar
 
         do {
             $dates[] = new Date($day, ($day->lt($startOfMonth) || $day->gt($endOfMonth)));
-            $day = $day->clone()->addDay();
+            $day = $day->copy()->addDay();
         } while ($day->lte($endDay));
 
         return $dates;
@@ -136,10 +136,10 @@ class Calendar
     public function getMonthName($short = false)
     {
         if ($short) {
-            return $this->date->shortMonthName;
+            return ucwords($this->date->formatLocalized('%b'));
         }
 
-        return $this->date->monthName;
+        return $this->date->formatLocalized('%B');
     }
 
     public function getDayNames($short = false)
@@ -147,8 +147,8 @@ class Calendar
         $start = $this->startOfWeek();
         $names = [];
         for ($i = 0; $i < 7; $i++) {
-            $day = $start->clone()->addDay($i);
-            $names[] = ($short) ? $day->shortDayName : $day->dayName;
+            $day = $start->copy()->addDay($i);
+            $names[] = ($short) ? $day->formatLocalized('%a') : $day->formatLocalized('%A');
         }
 
         return $names;
@@ -156,7 +156,16 @@ class Calendar
 
     private function startOfWeek()
     {
-        return $this->date->clone()->startOfWeek($this->start_of_week);
+        return $this->getDateCopy()->startOfWeek($this->start_of_week);
+    }
+
+    private function getDateCopy()
+    {
+        $dateCopy = $this->date->copy();
+        $dateCopy->setWeekStartsAt($this->start_of_week);
+        $dateCopy->setWeekEndsAt($this->end_of_week);
+
+        return $dateCopy;
     }
 
     public function __get($name)
