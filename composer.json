@@ -3,7 +3,7 @@
     "description": "PHP Calendar Utilities for Drawing Calendars",
     "type": "library",
     "require": {
-        "nesbot/carbon": "2"
+        "nesbot/carbon": "^2"
     },
     "license": "MIT",
     "authors": [
