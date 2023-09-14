@@ -4,7 +4,7 @@ use Arkitecht\Calendar\Date;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 
-class CalendarTests extends TestCase
+class DateTest extends TestCase
 {
     /** @test */
     function can_set_is_today()

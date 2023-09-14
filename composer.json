@@ -19,7 +19,17 @@
             "Arkitecht\\Calendar\\": "src/Arkitecht/Calendar/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
     "require-dev": {
         "phpunit/phpunit": "^8.3"
+    },
+    "config": {
+        "allow-plugins": {
+            "kylekatarnls/update-helper": false
+        }
     }
 }

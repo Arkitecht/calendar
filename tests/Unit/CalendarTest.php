@@ -292,5 +292,45 @@ class CalendarTest extends TestCase
         $this->assertEquals('sábado', $names[6]);
     }
 
+    /** @test */
+    function can_get_weeks_in_month()
+    {
+        $calendar = new Arkitecht\Calendar\Calendar('2023-01-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-02-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-03-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-04-10');
+        $this->assertEquals(6, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-05-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-06-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-07-10');
+        $this->assertEquals(6, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-08-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-09-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-010-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-11-10');
+        $this->assertEquals(5, $calendar->getNumberOfWeeksInMonth());
+
+        $calendar = new Arkitecht\Calendar\Calendar('2023-12-10');
+        $this->assertEquals(6, $calendar->getNumberOfWeeksInMonth());
+    }
+
 
 }

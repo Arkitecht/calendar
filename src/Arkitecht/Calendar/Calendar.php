@@ -154,6 +154,19 @@ class Calendar
         return $names;
     }
 
+    public function getNumberOfWeeksInMonth()
+    {
+        $start = $this->getDateCopy()->startOfMonth()->startOfWeek($this->start_of_week);
+
+        $numberOfWeeks = 0;
+        while ($start->lte($this->getDateCopy()->endOfMonth())) {
+            $start->addWeek();
+            $numberOfWeeks++;
+        }
+
+        return $numberOfWeeks;
+    }
+
     private function startOfWeek()
     {
         return $this->getDateCopy()->startOfWeek($this->start_of_week);
