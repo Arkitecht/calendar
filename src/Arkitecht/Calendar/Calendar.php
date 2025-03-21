@@ -136,10 +136,10 @@ class Calendar
     public function getMonthName($short = false)
     {
         if ($short) {
-            return ucwords($this->date->formatLocalized('%b'));
+            return ucwords($this->date->shortEnglishMonth);
         }
 
-        return $this->date->formatLocalized('%B');
+        return $this->date->monthName;
     }
 
     public function getDayNames($short = false)
@@ -148,7 +148,7 @@ class Calendar
         $names = [];
         for ($i = 0; $i < 7; $i++) {
             $day = $start->copy()->addDay($i);
-            $names[] = ($short) ? $day->formatLocalized('%a') : $day->formatLocalized('%A');
+            $names[] = ($short) ? $day->shortEnglishDayOfWeek : $day->dayName;
         }
 
         return $names;
@@ -175,8 +175,6 @@ class Calendar
     private function getDateCopy()
     {
         $dateCopy = $this->date->copy();
-        $dateCopy->setWeekStartsAt($this->start_of_week);
-        $dateCopy->setWeekEndsAt($this->end_of_week);
 
         return $dateCopy;
     }
